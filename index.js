@@ -63,26 +63,26 @@ client.on('voiceStateUpdate', (oldState, newState) => {
 async function playChupapiMunanyo(voiceChannel){
 
   const connected = await voiceChannel.join();
+  console.log("Inside the things")
   // connected.play("sounds/chupapi-munanyo.mp3)
 
-  const player = await connected.play(fs.createReadStream("sounds/chupapi-munanyo.mp3"));
-
   try {
-      
-  } catch (error) {
-      error.log();
-  }
+      const player = connected.play("sounds/chupapi-munanyo.mp3",{ volume: 0.1 });
 
-  player.on('start', () => {
-	console.log('audio.mp3 is now playing!');});
-
-  player.on('finish', () => {
-	console.log('audio.mp3 has finished playing!');
-
-  //connected.leave();
-});
-
+    console.log("after the things")
+    player.on('start', () => {
+        console.log('audio.mp3 is now playing!');});
   
+    player.on('finish', () => {
+      console.log('audio.mp3 has finished playing!');
+      voiceChannel.leave();
+      });
+
+  } catch (error) {
+      console.log(error);
+  }
+  
+
   return
 }
 
