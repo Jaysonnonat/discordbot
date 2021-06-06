@@ -3,6 +3,7 @@
 var Discord = require("discord.js");
 var client = new Discord.Client();
 var fs = require('fs');
+var keepAlive = require("./server")
 
 client.on('ready', () => {
     console.log("Bot is ready");
@@ -10,7 +11,8 @@ client.on('ready', () => {
 });
 
 async function getUsers(){
-    const j_guild = await client.guilds.fetch('850878886866321438');
+    const j_guild = await client.guilds.fetch('377696049533419531');
+
 
     const j_guild_members = await j_guild.members.fetch();
 
@@ -48,15 +50,17 @@ client.on('voiceStateUpdate', (oldState, newState) => {
 
   console.log("User changed");
     // check for bot
-    if (oldState.member.user.bot) return;
+    // if (oldState.member.user.bot) return;
 
     // the rest of your code
     var channelToConnet = newState.member.voice.channel;
     
-    
+    if(newState.member.user.id == 606988310644260875){
+      playChupapiMunanyo(channelToConnet);
+    }
 
-    playChupapiMunanyo(channelToConnet);
-    
+    // 222467949695467520
+    //606988310644260875
     //channelToConnet.leave();
 })
 
@@ -67,7 +71,7 @@ async function playChupapiMunanyo(voiceChannel){
   // connected.play("sounds/chupapi-munanyo.mp3)
 
   try {
-      const player = connected.play("sounds/chupapi-munanyo.mp3",{ volume: 0.1 });
+      const player = connected.play("sounds/chupapi-munanyo.mp3",{ volume: 0.2 });
 
     console.log("after the things")
     player.on('start', () => {
@@ -86,4 +90,5 @@ async function playChupapiMunanyo(voiceChannel){
   return
 }
 
+keepAlive()
 client.login(process.env.TOKEN);
