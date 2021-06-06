@@ -67,6 +67,11 @@ async function playChupapiMunanyo(voiceChannel){
 
   const player = await connected.play(fs.createReadStream("sounds/chupapi-munanyo.mp3"));
 
+  try {
+      
+  } catch (error) {
+      error.log();
+  }
 
   player.on('start', () => {
 	console.log('audio.mp3 is now playing!');});
@@ -74,7 +79,7 @@ async function playChupapiMunanyo(voiceChannel){
   player.on('finish', () => {
 	console.log('audio.mp3 has finished playing!');
 
-  connected.leave();
+  //connected.leave();
 });
 
   
